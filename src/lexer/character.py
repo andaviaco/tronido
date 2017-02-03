@@ -1,3 +1,4 @@
+import os
 
 class Character(object):
     """docstring for Character."""
