@@ -37,5 +37,36 @@ class Scanner(object):
             self.source_index
         )
 
-    def peek_next(self):
-        pass
+    def peek_next(self, offset=1):
+        source_index = self.source_index
+        line_index = self.line_index
+        col_index = self.col_index
+
+        source_index += 1
+
+        if source_index > 0:
+            if self.source_text[source_index-1] == os.linesep:  # the previous character was a newline
+                line_index += 1
+                col_index = -1
+
+        col_index += 1
+
+        if source_index > self.last_index: # end of source_text
+            value = self.ENDMARK
+        else:
+            value = self.source_text[source_index]
+
+        return Character(
+            value,
+            line_index,
+            col_index,
+            source_index
+        )
+
+    def lookahead(self, offset=1):
+        index = self.source_index + offset
+
+        if index > self.last_index:
+            return self.ENDMARK
+
+        return self.source_text[index]
