@@ -15,6 +15,17 @@ class Scanner(object):
         self.line_index = 0
         self.col_index = -1
 
+
+    def __iter__(self):
+        while True:
+            char = self.get_next()
+            yield char
+
+            if char.value == self.ENDMARK:
+                break
+
+
+
     def get_next(self):
         self.source_index += 1
 
