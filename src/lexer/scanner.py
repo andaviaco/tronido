@@ -19,10 +19,13 @@ class Scanner(object):
     def __iter__(self):
         while True:
             char = self.get_next()
-            yield char
+            char_ahead = self.peek_next();
+            # print('SALE')
+            yield (char, char_ahead)
+            # print('ENTRAD')
 
-            if char.value == self.ENDMARK:
-                break
+            if char.value is self.ENDMARK or char_ahead.value is None:
+                raise StopIteration
 
 
 
@@ -48,24 +51,29 @@ class Scanner(object):
             self.source_index
         )
 
-    def peek_next(self, offset=1):
+    def peek_next(self):
         source_index = self.source_index
         line_index = self.line_index
         col_index = self.col_index
+        value = None
 
         source_index += 1
 
-        if source_index > 0:
+        if source_index > 0 and source_index-1 < len(self.source_text):
             if self.source_text[source_index-1] == os.linesep:  # the previous character was a newline
                 line_index += 1
                 col_index = -1
 
-        col_index += 1
+            col_index += 1
 
-        if source_index > self.last_index: # end of source_text
-            value = self.ENDMARK
+            if source_index > self.last_index: # end of source_text
+                value = self.ENDMARK
+            else:
+                value = self.source_text[source_index]
         else:
-            value = self.source_text[source_index]
+            line_index = -1
+            col_index = -1
+            source_index = -1
 
         return Character(
             value,
