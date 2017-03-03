@@ -37,7 +37,7 @@ logic_const = ['verdadero', 'falso']
 
 logic_operators = """
     y
-    n
+    no
     o
 """.split()
 
@@ -47,19 +47,26 @@ one_char_symbols = '''
     ( )
     [ ]
     < >
-    : ; . ,
+    , : ; .
 '''.split()
 
 aritmetic_chars = '+-/*%^'
 
 two_char_symbols = '''
+    :=
     <=
     >=
     <>
+    //
+    /*
 '''.split()
 
 IDENTIFIER_STARTCHARS = string.ascii_letters + '_'
 IDENTIFIER_CHARS = string.ascii_letters + string.digits + '_'
+COMMENT_SINGLE_LINE_START = '//'
+COMMENT_SINGLE_LINE_END = '\n'
+COMMENT_MULTI_LINE_START = '/*'
+COMMENT_MULTI_LINE_END = '*/'
 
 NUMBER_STARTCHARS = string.digits
 NUMBER_CHARS = string.digits + '.'
@@ -78,3 +85,6 @@ ARITMETIC = '<OpeAri>'
 WHITESPACE = '<whitespace>'
 COMMENT = '<comment>'
 EOF = '<eof>'
+RELATIONAL_OP = '<OpeRel>'
+DELIMIT = '<Delimi>'
+ASING_OP = '<OpeAsi>'

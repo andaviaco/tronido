@@ -19,17 +19,70 @@ class Lexer(object):
         while True:
             token, token_ahead = self.get_token()
 
-            if token.value == self.scanner.ENDMARK:
+            if token.value is self.scanner.ENDMARK or token_ahead.value is None:
                 token.type = lang.EOF
                 yield token
+                raise StopIteration
+
+
+            composed = token.value + token_ahead.value
+
+            if composed in lang.two_char_symbols:
+                token.value = composed
+
+                if composed in lang.COMMENT_SINGLE_LINE_START:
+                    while True:
+                        token_next, _ = self.get_token()
+
+                        if token_next.value in lang.COMMENT_SINGLE_LINE_END:
+                            break
+
+                    continue
+
+                if composed in lang.COMMENT_MULTI_LINE_START:
+                    while True:
+                        token_next, ahead = self.get_token()
+                        composed_next = token_next.value + ahead.value
+
+                        if token_next.value is self.scanner.ENDMARK or ahead.value is self.scanner.ENDMARK:
+                            raise LexerError('Unexpected End Of File before end of comment')
+
+                        if composed_next in lang.COMMENT_MULTI_LINE_END:
+                            token_next, _ = self.get_token()
+                            break
+
+                    continue
+
+
+                if composed in '<= >= <>':
+                    token.type = lang.RELATIONAL_OP
+
+                if composed == ':=':
+                    token.type = lang.ASING_OP
+
+                    self.get_token()
+
+                yield token
+
+            if token.value in lang.one_char_symbols:
+                if token.value in '< = >':
+                    token.type = lang.RELATIONAL_OP
+                else:
+                    token.type = lang.DELIMIT
+
+                yield token
+
 
             if token.value in lang.IDENTIFIER_STARTCHARS:
                 token.type = lang.IDENTIFIER
 
-                token_next, x = self.get_token()
-                while token_next.value in lang.IDENTIFIER_CHARS:
-                    token.value += token_next.value
-                    token_next, x = self.get_token()
+                if token_ahead.value in lang.IDENTIFIER_CHARS:
+                    while True:
+                        token_next, ahead = self.get_token()
+                        token.value += token_next.value
+
+                        if not ahead.value in lang.IDENTIFIER_CHARS:
+                            break
 
                 if token.value in lang.keywords:
                     token.type = lang.KEYWORD
@@ -45,58 +98,47 @@ class Lexer(object):
                 token.type = lang.DIGIT
                 has_digit_mark = False
 
-                token_next, x = self.get_token()
+                if token_ahead.value in lang.NUMBER_CHARS:
+                    token_next, _ = self.get_token()
 
-                while token_next.value in lang.NUMBER_CHARS:
-                    if token_next.value == '.':
-                        if not has_digit_mark:
-                            token.type = lang.DECIMAL
-                        else:
-                            yield token
+                    while token_next.value in lang.NUMBER_CHARS:
+                        if token_next.value == '.':
+                            if not has_digit_mark:
+                                token.type = lang.DECIMAL
+                            else:
+                                yield token
 
-                    token.value += token_next.value
-                    token_next, x = self.get_token()
+                        token.value += token_next.value
+                        token_next, _ = self.get_token()
 
                 yield token
 
             if token.value in lang.STRING_STARTCHARS:
-                token_next, x = self.get_token()
+                while True:
+                    token_next, _ = self.get_token()
 
-                while token_next.value != lang.STRING_STARTCHARS:
-                    if token_next.value == self.scanner.ENDMARK:
-                        raise LexerError
+                    if token_next.value is self.scanner.ENDMARK:
+                        raise LexerError('Unexpected End Of File before end of string')
+
+                    if token_next.value is lang.STRING_STARTCHARS:
+                        break
 
                     token.value += token_next.value
-                    token_next, x = self.get_token()
 
                 token.value += token_next.value
                 token.type = lang.STRING
 
                 yield token
 
-            # TODO: no funca
             if token.value in lang.aritmetic_chars:
-                token.type = ARITMETIC
+                token.type = lang.ARITMETIC
                 yield token
 
-
-
-            # print('TOOOOOOKEN 1', type(token.value), token.value)
-            # if token_ahead.value is None:
-            #     raise StopIteration
-            # print('SALE')
-            # yield token
-            # print('ENTRA')
-
-            # print('TOOOOOOKEN 2', type(token.value), token.value)
             if token.type is self.scanner.ENDMARK or token_ahead.value is None:
-                # print('BREEEEAK')
                 raise StopIteration
 
-
-
-    def abort(self):
-        pass
+    def next_token(self):
+        return next(iter(self))
 
     def get_token(self):
         char1, char2 = next(iter(self.scanner))
@@ -105,3 +147,6 @@ class Lexer(object):
         token_2 = Token(char2)
 
         return (token_1, token_2)
+
+    def abort(self):
+        pass
