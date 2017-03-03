@@ -1,19 +1,28 @@
-# from lexer.scanner import Scanner
+import os
+import argparse
+
 from lexer.lexer import Lexer
 
 if __name__ == '__main__':
-    # scanner = Scanner('holas a todos\nsipi')
-    lexer = Lexer("""
-decimal xoy=35.5
-entero m = 3
-logico true = verdadero
-x y m
-imprime(1+2)
-a="sipi"
-    """)
+    parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group(required=True)
+    script_dir = os.path.dirname(__file__)
+
+    group.add_argument('source', help='Source file relative path' , nargs='?', default=None)
+    group.add_argument('-c', '--cmd', help='program passed in as string')
+
+    args = parser.parse_args()
+
+    if args.source:
+        abs_file_path = os.path.join(script_dir, args.source)
+
+        with open(abs_file_path) as src:
+            source_code = src.read()
+
+    elif args.cmd:
+        source_code = args.cmd
+
+    lexer = Lexer(source_code)
 
     for token in lexer:
-    # for (char, char_ahead) in scanner:
         print(token.show(True))
-        # print('CURRENT', char)
-        # print('AHEAD  ', char_ahead)
