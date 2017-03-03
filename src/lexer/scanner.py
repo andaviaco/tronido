@@ -20,9 +20,8 @@ class Scanner(object):
         while True:
             char = self.get_next()
             char_ahead = self.peek_next();
-            # print('SALE')
+
             yield (char, char_ahead)
-            # print('ENTRAD')
 
             if char.value is self.ENDMARK or char_ahead.value is None:
                 raise StopIteration
@@ -32,7 +31,7 @@ class Scanner(object):
     def get_next(self):
         self.source_index += 1
 
-        if self.source_index > 0:
+        if self.source_index > 0 and self.source_index-1 < len(self.source_text):
             if self.source_text[self.source_index-1] == os.linesep:  # the previous character was a newline
                 self.line_index += 1
                 self.col_index = -1
