@@ -8,15 +8,16 @@ from .types import Decimal
 from .types import String
 from .types import Bool
 
-from .statements import Declaration
-from .statements import VarDeclarator
+from .declarations import Declaration
+from .declarations import VarDeclarator
+from .declarations import Identifier
+from .declarations import FunctionDef
+from .declarations import Parameter
+
 from .statements import IfStat
 
 from .expressions import UnaryExp
 from .expressions import BinaryExp
-
-from .identifier import Identifier
-from .functiondef import FunctionDef
 
 from . import builtin
 
@@ -67,7 +68,6 @@ class Syntax(object):
 
     def _raise_expected(self, expected):
         warnings.warn(f'Expected {expected} but got {self.current_token.value}. Line: {self.current_token.line_index} - Col: {self.current_token.col_index}', SyntaxError)
-
 
     def _match_assing(self, value, expected):
         if value in expected:
@@ -124,7 +124,7 @@ class Syntax(object):
             node = self.declaration(datatype, isfunc=isfunc)
 
         else:
-            self._raise_expected('|'.join(RESERVED_TYPES + ['constante']))
+            self._raise_expected('|'.join(lang.RESERVED_TYPES + ['constante']))
 
             self.current_token = self.lexer.next_token()
 
@@ -245,6 +245,8 @@ class Syntax(object):
             else:
                 self._raise_expected('enetro|constante')
 
+            self.match_value(']')
+
         return dict(
             dimensions_sizes=dimensions_sizes,
             dimensions=len(dimensions_sizes)
@@ -282,8 +284,6 @@ class Syntax(object):
                 aux = aux.next = Parameter(type_def, identifier, arg_token)
 
         return None
-
-
 
     def compound_stat(self, **cond):
         self.match_value('inicio')
