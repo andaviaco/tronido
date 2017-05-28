@@ -20,6 +20,8 @@ from .statements import WhileStat
 from .statements import BreakStat
 from .statements import SwitchStat
 from .statements import CaseStat
+from .statements import ForStat
+from .statements import ContinueStat
 
 from .expressions import UnaryExp
 from .expressions import BinaryExp
@@ -381,10 +383,51 @@ class Syntax(object):
         return WhileStat(exp, stat, while_token)
 
     def for_statement(self):
-        pass
+        for_token = self.current_token
+
+        self.match_value('para')
+
+        identifier_token = self.current_token
+        self.match_type(lang.IDENTIFIER)
+
+        self.match_value('en')
+        self.match_value('rango')
+
+        identifier = Identifier(identifier_token.value, identifier_token)
+
+        initial_value = self.logical_or_exp()
+        initializer = BinaryExp(':=', identifier, initial_value, self.current_token)
+
+        self.match_value('a')
+
+        stop_condition = self.logical_or_exp()
+        op = '>=' if self.current_token.value == 'decr' else '<='
+        condition = BinaryExp(op, identifier, stop_condition, self.current_token)
+
+        if self.current_token.value in ['incr', 'decr']:
+            step_token = self.current_token
+
+            self.match_value(['incr', 'decr'])
+
+            step_op = '-' if step_token.value == 'decr' else '+'
+            step_exp = BinaryExp(step_op, identifier, self.logical_or_exp(), step_token)
+            step = BinaryExp(':=', identifier, step_exp, step_token)
+        else:
+            step_def = Integer(1, self.current_token)
+            step_inc = BinaryExp('+', identifier, step_def, self.current_token)
+            step = BinaryExp(':=', identifier, step_inc, self.current_token)
+
+        stats = self.statement()
+
+        return ForStat(initializer, condition, step, stats, for_token)
 
     def continue_statement(self):
-        pass
+        continue_token = self.current_token
+
+        self.match_value('continua')
+        self.match_value(';')
+
+        return ContinueStat(continue_token)
 
     def swich_statment(self):
         switch_token = self.current_token
@@ -491,7 +534,7 @@ class Syntax(object):
             exp = self.logical_or_exp()
             self.match_value(')')
         else:
-            self._raise_expected('Expression')
+            self._raise_expected('<Expression>')
 
         return exp
 
