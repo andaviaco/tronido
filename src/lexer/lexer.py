@@ -1,13 +1,16 @@
+import warnings
 
 from . import lang
 from .scanner import Scanner
 from .token import Token
 
-class LexerError(Exception):
+class LexerError(Warning):
     pass
 
 
 class Lexer(object):
+    offsetstack = []
+
     """docstring for Lexer."""
     def __init__(self, source_text):
         super(Lexer, self).__init__()
@@ -45,7 +48,7 @@ class Lexer(object):
                         composed_next = token_next.value + ahead.value
 
                         if token_next.value is self.scanner.ENDMARK or ahead.value is self.scanner.ENDMARK:
-                            raise LexerError('Unexpected End Of File before end of comment')
+                            warnings.warn('Unexpected End Of File before end of comment', LexerError)
 
                         if composed_next in lang.COMMENT_MULTI_LINE_END:
                             token_next, _ = self.get_token()
@@ -122,7 +125,7 @@ class Lexer(object):
                     token_next, _ = self.get_token()
 
                     if token_next.value is self.scanner.ENDMARK:
-                        raise LexerError('Unexpected End Of File before end of string')
+                        warnings.warn('Unexpected End Of File before end of string', LexerError)
 
                     if token_next.value is lang.STRING_STARTCHARS:
                         break
@@ -142,6 +145,9 @@ class Lexer(object):
                 raise StopIteration
 
     def next_token(self):
+        if self.offsetstack:
+            return self.offsetstack.pop()
+
         return next(iter(self))
 
     def get_token(self):
@@ -151,6 +157,13 @@ class Lexer(object):
         token_2 = Token(char2)
 
         return (token_1, token_2)
+
+    def lookahead(self):
+        token = next(iter(self))
+
+        self.offsetstack.append(token)
+
+        return token
 
     def abort(self):
         pass
