@@ -21,5 +21,7 @@ class Token(object):
         else:
             res = f'{self.type} {self.value}'
 
-
         return res
+
+    def contains(self, value):
+        return self.value in value or self.type in value
