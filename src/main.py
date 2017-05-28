@@ -1,7 +1,9 @@
 import os
+import sys
 import argparse
 
-from lexer.lexer import Lexer
+from lexer import Lexer
+from syntax import Syntax
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -23,6 +25,12 @@ if __name__ == '__main__':
         source_code = args.cmd
 
     lexer = Lexer(source_code)
+    syntax = Syntax(lexer)
 
-    for token in lexer:
-        print(token.show(True))
+    parse_tree = syntax.parse()
+
+    for node in parse_tree:
+        print(node)
+
+    # for token in lexer:
+    #     print(token.show(True))
