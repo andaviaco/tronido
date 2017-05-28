@@ -1,2 +1,2 @@
 # tronido
-Tronido Languaje compiler made in Python. :snake:
+Tronido Language compiler made in Python. :snake:
