@@ -58,7 +58,7 @@ class Lexer(object):
                     token.type = lang.RELATIONAL_OP
 
                 if composed == ':=':
-                    token.type = lang.ASING_OP
+                    token.type = lang.ASSING_OP
 
                     self.get_token()
 
@@ -95,11 +95,11 @@ class Lexer(object):
 
 
             if token.value in lang.NUMBER_STARTCHARS:
-                token.type = lang.DIGIT
+                token.type = lang.INTEGER
                 has_digit_mark = False
 
                 if token_ahead.value in lang.NUMBER_CHARS:
-                    token_next, _ = self.get_token()
+                    token_next, lookahead = self.get_token()
 
                     while token_next.value in lang.NUMBER_CHARS:
                         if token_next.value == '.':
@@ -109,7 +109,11 @@ class Lexer(object):
                                 yield token
 
                         token.value += token_next.value
-                        token_next, _ = self.get_token()
+
+                        if lookahead.value not in lang.NUMBER_CHARS:
+                            break
+
+                        token_next, lookahead = self.get_token()
 
                 yield token
 
