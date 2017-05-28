@@ -1,6 +1,6 @@
 import os
-import sys
 import argparse
+import warnings
 
 from lexer import Lexer
 from syntax import Syntax
@@ -24,13 +24,19 @@ if __name__ == '__main__':
     elif args.cmd:
         source_code = args.cmd
 
-    lexer = Lexer(source_code)
-    syntax = Syntax(lexer)
+    with warnings.catch_warnings(record=True) as w:
+        warnings.simplefilter('always')
 
-    parse_tree = syntax.parse()
+        lexer = Lexer(source_code)
+        syntax = Syntax(lexer)
 
-    for node in parse_tree:
-        print(node)
+        parse_tree = syntax.parse()
+
+        for error in w:
+            print(f'{error.category.__name__}: {error.message}')
+
+        # for node in parse_tree:
+        #     print(node)
 
     # for token in lexer:
     #     print(token.show(True))
