@@ -1,6 +1,6 @@
 import pprint as pp
 
-from .tree import Node
+from ..tree import Node
 
 class Identifier(Node):
     """docstring for Identifier."""

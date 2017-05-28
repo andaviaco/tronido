@@ -1,4 +1,4 @@
-from .tree import Node
+from ..tree import Node
 
 class Parameter(Node):
     """docstring for Parameter."""

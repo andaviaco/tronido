@@ -1,4 +1,4 @@
-from .tree import Node
+from ..tree import Node
 
 class FunctionDef(Node):
     """docstring for FunctionDef."""
