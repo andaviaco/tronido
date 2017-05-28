@@ -1,11 +1,20 @@
 import string
 
-keywords = '''
+RESERVED_TYPES = [
+    'entero',
+    'decimal',
+    'alfabetico',
+    'logico',
+]
+
+RESERVED_FUNCS = [
+    'imprime',
+    'imprimenl',
+    'lee',
+]
+
+RESERVED_WORDS = '''
     constante
-    decimal
-    entero
-    alfabetico
-    logico
     funcion
     si
     regresa
@@ -24,14 +33,12 @@ keywords = '''
     opcion
     caso
     procedimiento
-    imprime
-    imprimenl
-    lee
     programa
     interrumpe
     continua
     otro
 '''.split()
+
 
 logic_const = ['verdadero', 'falso']
 
@@ -61,6 +68,8 @@ two_char_symbols = '''
     /*
 '''.split()
 
+keywords = RESERVED_WORDS + RESERVED_TYPES + RESERVED_FUNCS
+
 IDENTIFIER_STARTCHARS = string.ascii_letters + '_'
 IDENTIFIER_CHARS = string.ascii_letters + string.digits + '_'
 COMMENT_SINGLE_LINE_START = '//'
@@ -77,7 +86,7 @@ WHITESPACE_CHARS = string.whitespace
 STRING = '<CteAlf>'
 IDENTIFIER = '<identifier>'
 KEYWORD = '<PalRes>'
-DIGIT = '<CteEnt>'
+INTEGER = '<CteEnt>'
 LOGIC_OP = '<OpeLog>'
 LOGIC_CONST = '<CteLog>'
 DECIMAL = '<CteDec>'
@@ -87,4 +96,4 @@ COMMENT = '<comment>'
 EOF = '<eof>'
 RELATIONAL_OP = '<OpeRel>'
 DELIMIT = '<Delimi>'
-ASING_OP = '<OpeAsi>'
+ASSING_OP = '<OpeAsi>'
