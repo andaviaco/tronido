@@ -15,9 +15,11 @@ from .declarations import FunctionDef
 from .declarations import Parameter
 
 from .statements import IfStat
+from .statements import ReturnStat
 
 from .expressions import UnaryExp
 from .expressions import BinaryExp
+from .expressions import FunctionCall
 
 from . import builtin
 
@@ -300,6 +302,7 @@ class Syntax(object):
 
     def stat_list(self):
         keywords_subset = [
+            'si',
             'iterar',
             'para',
             'regresa',
@@ -382,13 +385,28 @@ class Syntax(object):
         pass
 
     def return_statement(self):
-        pass
+        return_token = self.current_token
+
+        self.match_value('regresa')
+
+        exp = None
+        if self.current_token.value != ';':
+            exp = self.logical_or_exp()
+
+        self.match_value(';')
+
+        return ReturnStat(exp, return_token)
 
     def start_statement(self):
         return self.compound_stat()
 
     def else_statement(self):
-        pass
+        stat = None
+        if self.current_token.value == 'sino':
+            self.match_value('sino')
+            stat = self.statement()
+
+        return stat
 
     def primary_exp(self, **cond):
         isconstant = cond.get('isconstant', False)
@@ -483,15 +501,17 @@ class Syntax(object):
 
         return exp
 
+    @basic_expression('additive_exp')
     def relational_exp(self):
-        exp = self.additive_exp()
-
-        while self.current_token.type == lang.RELATIONAL_OP:
-            symbol_token = self.current_token
-            self.match_type(RELATIONAL_OP)
-
-            exp = BinaryExp(symbol_token.value, exp, self.additive_exp(), symbol_token)
-        return exp
+        return lang.RELATIONAL_OP
+        # exp = self.additive_exp()
+        #
+        # while self.current_token.type == lang.RELATIONAL_OP:
+        #     symbol_token = self.current_token
+        #     self.match_type(lang.RELATIONAL_OP)
+        #
+        #     exp = BinaryExp(symbol_token.value, exp, self.additive_exp(), symbol_token)
+        # return exp
 
     @basic_expression('multiplicative_exp')
     def additive_exp(self):
