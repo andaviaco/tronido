@@ -1,3 +1,4 @@
+import pprint as pp
 
 class Node(object):
     """docstring for Node."""
@@ -20,4 +21,11 @@ class Node(object):
             node = node.next
 
     def __str__(self):
-        return f'{self.__class__.__name__} | {self.token.value} | {self.token.type} --{self.symbol}--'
+        rep = dict(
+            name=self.__class__.__name__,
+            value=self.token.value,
+            type=self.token.type,
+            next_node=self.next
+        )
+        
+        return pp.pformat(rep)
