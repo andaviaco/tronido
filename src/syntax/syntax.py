@@ -17,6 +17,7 @@ from .declarations import Parameter
 from .statements import IfStat
 from .statements import ReturnStat
 from .statements import WhileStat
+from .statements import BreakStat
 
 from .expressions import UnaryExp
 from .expressions import BinaryExp
@@ -393,7 +394,13 @@ class Syntax(object):
         pass
 
     def break_statement(self):
-        pass
+        break_token = self.current_token
+
+        self.match_value('interrumpe')
+        self.match_value(';')
+
+        return BreakStat(break_token)
+
 
     def return_statement(self):
         return_token = self.current_token
