@@ -16,6 +16,7 @@ from .declarations import Parameter
 
 from .statements import IfStat
 from .statements import ReturnStat
+from .statements import WhileStat
 
 from .expressions import UnaryExp
 from .expressions import BinaryExp
@@ -364,7 +365,17 @@ class Syntax(object):
         return IfStat(exp, stat, else_stat, if_token)
 
     def while_statement(self):
-        pass
+        while_token = self.current_token
+
+        self.match_value('iterar')
+        self.match_value('mientras')
+        self.match_value('(')
+        exp = self.logical_or_exp()
+        self.match_value(')')
+
+        stat = self.statement()
+
+        return WhileStat(exp, stat, while_token)
 
     def for_statement(self):
         pass
