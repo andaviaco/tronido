@@ -539,19 +539,19 @@ class Syntax(object):
         return exp
 
     def assignment_expression(self):
+        identifier = None
         token_ahead = self.lexer.lookahead()
 
-
-        if self.current_token.contains(lang.IDENTIFIER):
+        if self.current_token.type == lang.IDENTIFIER:
             identifier = Identifier(self.current_token.value, self.current_token)
 
-        if token_ahead.contains(lang.ASSING_OP):
+        if token_ahead.type == lang.ASSING_OP:
             self.match_type(lang.IDENTIFIER)
-        elif token_ahead.contains('['):
+        elif token_ahead.value == '[':
+            self.match_type(lang.IDENTIFIER)
             identifier.array_values = self.array_exp()
-            self.match_type(lang.IDENTIFIER)
 
-        if self.current_token.contains(lang.ASSING_OP):
+        if self.current_token.type == lang.ASSING_OP:
             symbol_token = self.current_token
             self.match_type(lang.ASSING_OP)
             exp = self.logical_or_exp()
