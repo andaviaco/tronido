@@ -97,3 +97,10 @@ EOF = '<eof>'
 RELATIONAL_OP = '<OpeRel>'
 DELIMIT = '<Delimi>'
 ASSING_OP = '<OpeAsi>'
+
+DATA_TYPES = [
+    STRING,
+    INTEGER,
+    DECIMAL,
+    LOGIC_CONST,
+]

@@ -18,6 +18,8 @@ from .statements import IfStat
 from .statements import ReturnStat
 from .statements import WhileStat
 from .statements import BreakStat
+from .statements import SwitchStat
+from .statements import CaseStat
 
 from .expressions import UnaryExp
 from .expressions import BinaryExp
@@ -26,10 +28,10 @@ from .expressions import FunctionCall
 from . import builtin
 
 
-RESERVED_FUNCS_MAP = {
+BUILTIN_FUNCS_MAP = {
     'imprime': builtin.PrintFn,
-    'imprimenl': None,
-    'lee':  None,
+    'imprimenl': builtin.PrintlnFn,
+    'lee':  builtin.ReadFn,
 }
 
 def basic_expression(child_exp):
@@ -71,7 +73,8 @@ class Syntax(object):
         return tree
 
     def _raise_expected(self, expected):
-        warnings.warn(f'Expected {expected} but got {self.current_token.value}. Line: {self.current_token.line_index} - Col: {self.current_token.col_index}', SyntaxError)
+        warnings.warn(f'Expected "{expected}" but got "{self.current_token.value}". Line: {self.current_token.line_index} - Col: {self.current_token.col_index}', SyntaxError)
+        raise
 
     def _match_assing(self, value, expected):
         if value in expected:
@@ -373,7 +376,6 @@ class Syntax(object):
         self.match_value('(')
         exp = self.logical_or_exp()
         self.match_value(')')
-
         stat = self.statement()
 
         return WhileStat(exp, stat, while_token)
@@ -385,13 +387,42 @@ class Syntax(object):
         pass
 
     def swich_statment(self):
-        pass
+        switch_token = self.current_token
+
+        self.match_value('haz')
+        self.match_value('opcion')
+        self.match_value('(')
+        exp = self.logical_or_exp()
+        self.match_value(')')
+        stats = self.statement()
+
+        return SwitchStat(exp, stats, switch_token)
 
     def case_statement(self):
-        pass
+        case_token = self.current_token
+
+        self.match_value('caso')
+        if self.current_token.type in lang.DATA_TYPES:
+            exp = self.primary_exp()
+            self.match_value(':')
+            stats = self.statement()
+
+            return CaseStat(exp, stats, case_token)
+
+        self._raise_expected('|'.join(lang.DATA_TYPES))
+
+        return None
 
     def defaultcase_statement(self):
-        pass
+        default_token = self.current_token
+
+        self.match_value('otro')
+        self.match_value('caso')
+        self.match_value(':')
+
+        stats = self.statement()
+
+        return CaseStat(None, stats, default_token)
 
     def break_statement(self):
         break_token = self.current_token
@@ -573,7 +604,6 @@ class Syntax(object):
             self.match_value(token_symbol.value)
 
             return UnaryExp(token_symbol.value, self.unary_exp(**cond), token_symbol)
-
         return self.primary_exp(**cond)
 
     def function_call(self, identifier):
@@ -599,7 +629,7 @@ class Syntax(object):
         self.match_value(')')
 
         try:
-            return RESERVED_FUNCS_MAP[id_token.value](args, id_token)
+            return BUILTIN_FUNCS_MAP[id_token.value](args, id_token)
         except KeyError:
             return None
 
