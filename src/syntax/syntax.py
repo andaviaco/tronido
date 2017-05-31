@@ -75,7 +75,7 @@ class Syntax(object):
         return tree
 
     def _raise_expected(self, expected):
-        warnings.warn(f'Expected "{expected}" but got "{self.current_token.value}". Line: {self.current_token.line_index} - Col: {self.current_token.col_index}', SyntaxError)
+        warnings.warn(f'Expected "{expected}". Found "{self.current_token.value}". Line: {self.current_token.line_index} - Col: {self.current_token.col_index}', SyntaxError)
 
     def _match_assing(self, value, expected):
         if value in expected:
