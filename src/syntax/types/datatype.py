@@ -1,5 +1,7 @@
 from ..tree import Node
 
+ERROR_TYPE = 'E'
+
 TYPES_MAP = {
     'entero': 'I',
     'decimal': 'D',
@@ -13,6 +15,6 @@ class DataType(Node):
 
     def get_type(self):
         try:
-            return TYPES_MAP[this.symbol]
+            return TYPES_MAP[self.symbol]
         except KeyError:
-            return 'E'
+            return ERROR_TYPE

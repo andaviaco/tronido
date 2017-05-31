@@ -7,3 +7,8 @@ class Declaration(Node):
 
         self.datatype = datatype
         self.declarator = declarator
+
+    def proccess_semantic(self, **cond):
+        datatype = self.datatype.get_type()
+
+        Node.proccess_traversal_semantics(self.declarator, datatype=datatype)
