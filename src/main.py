@@ -4,6 +4,7 @@ import warnings
 
 from lexer import Lexer
 from syntax import Syntax
+from syntax.tree import Node
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -35,8 +36,10 @@ if __name__ == '__main__':
         for error in w:
             print(f'{error.category.__name__}: {error.message}')
 
-        # for node in parse_tree:
-        #     print(node)
+        for node in parse_tree:
+            print(node)
+
+        Node.proccess_traversal_semantics(parse_tree)
 
     # for token in lexer:
     #     print(token.show(True))

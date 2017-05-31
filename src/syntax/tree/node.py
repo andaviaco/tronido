@@ -1,6 +1,14 @@
 import pprint as pp
 
+from ..symtable import SymTable, GLOBAL_CONTEXT
+
+class SemanticError(Exception):
+    pass
+
+
 class Node(object):
+    symtable = SymTable()
+
     """docstring for Node."""
     def __init__(self, symbol, token):
         super().__init__()
@@ -27,5 +35,24 @@ class Node(object):
             type=self.token.type,
             next_node=self.next
         )
-        
+
         return pp.pformat(rep)
+
+
+    @staticmethod
+    def proccess_semantic(**cond):
+        pass
+
+    @staticmethod
+    def proccess_traversal_semantics(node, **cond):
+        cond_context = cond.get('context', None)
+
+        if cond.get('context', None):
+            Node.symtable.set_context(cond_context)
+
+        while node:
+            node.proccess_semantic()
+            node = node.next
+
+        if Node.symtable.current_contex != GLOBAL_CONTEXT:
+            Node.symtable.exit_context()
