@@ -1,13 +1,16 @@
+import warnings
 import pprint as pp
 
+from lexer import lang
 from ..symtable import SymTable, GLOBAL_CONTEXT
 
-class SemanticError(Exception):
+class SemanticError(Warning):
     pass
 
 
 class Node(object):
     symtable = SymTable()
+    datatype = lang.SEMANTIC_ERROR_TYPE
 
     """docstring for Node."""
     def __init__(self, symbol, token):
@@ -40,7 +43,11 @@ class Node(object):
 
 
     @staticmethod
-    def proccess_semantic(**cond):
+    def raise_error(msg):
+        warnings.warn(msg, SemanticError)
+
+    @staticmethod
+    def process_semantic(**cond):
         pass
 
     @staticmethod
@@ -51,8 +58,8 @@ class Node(object):
             Node.symtable.set_context(cond_context)
 
         while node:
-            node.proccess_semantic()
+            node.process_semantic(**cond)
             node = node.next
-
-        if Node.symtable.current_contex != GLOBAL_CONTEXT:
-            Node.symtable.exit_context()
+        #
+        # if Node.symtable.current_contex != GLOBAL_CONTEXT:
+        #     Node.symtable.exit_context()

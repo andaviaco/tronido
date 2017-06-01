@@ -33,13 +33,15 @@ if __name__ == '__main__':
 
         parse_tree = syntax.parse()
 
-        for error in w:
-            print(f'{error.category.__name__}: {error.message}')
-
         for node in parse_tree:
             print(node)
 
         Node.proccess_traversal_semantics(parse_tree)
+        Node.symtable.show()
+
+        for error in w:
+            print(f'{error.category.__name__}: {error.message}')
+
 
     # for token in lexer:
     #     print(token.show(True))

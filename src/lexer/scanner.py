@@ -12,8 +12,8 @@ class Scanner(object):
         self.source_text = source_text
         self.last_index = len(source_text) - 1
         self.source_index = -1
-        self.line_index = 0
-        self.col_index = -1
+        self.line_index = 1
+        self.col_index = 0
 
 
     def __iter__(self):
@@ -34,7 +34,7 @@ class Scanner(object):
         if self.source_index > 0 and self.source_index-1 < len(self.source_text):
             if self.source_text[self.source_index-1] == os.linesep:  # the previous character was a newline
                 self.line_index += 1
-                self.col_index = -1
+                self.col_index = 0
 
         self.col_index += 1
 
@@ -61,7 +61,7 @@ class Scanner(object):
         if source_index > 0 and source_index-1 < len(self.source_text):
             if self.source_text[source_index-1] == os.linesep:  # the previous character was a newline
                 line_index += 1
-                col_index = -1
+                col_index = 0
 
             col_index += 1
 
@@ -71,7 +71,7 @@ class Scanner(object):
                 value = self.source_text[source_index]
         else:
             line_index = -1
-            col_index = -1
+            col_index = 0
             source_index = -1
 
         return Character(

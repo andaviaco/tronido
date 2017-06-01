@@ -1,13 +1,14 @@
+from lexer import lang
 from ..tree import Node
 
-ERROR_TYPE = 'E'
+ERROR_TYPE = lang.SEMANTIC_ERROR_TYPE
 
 TYPES_MAP = {
-    'entero': 'I',
-    'decimal': 'D',
-    'alfabetico': 'S',
-    'logico': 'B',
-    'void': 'V',
+    'entero': lang.SEMANTIC_INT_TYPE,
+    'decimal': lang.SEMANTIC_DECIMAL_TYPE,
+    'alfabetico': lang.SEMANTIC_STRING_TYPE,
+    'logico': lang.SEMANTIC_LOGIC_TYPE,
+    'void': lang.SEMANTIC_VOID_TYPE,
 }
 
 class DataType(Node):

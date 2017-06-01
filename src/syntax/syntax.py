@@ -278,7 +278,7 @@ class Syntax(object):
 
             self.match_type(lang.IDENTIFIER)
 
-            node = aux = Parameter(type_def, identifier, arg_token)
+            aux = node = Parameter(type_def, identifier, arg_token)
 
             while self.current_token.value == ',':
                 self.match_value(',')
@@ -289,8 +289,9 @@ class Syntax(object):
 
                 self.match_type(lang.IDENTIFIER)
 
-                aux = aux.next = Parameter(type_def, identifier, arg_token)
+                aux = node.next = Parameter(type_def, identifier, arg_token)
 
+            return node
         return None
 
     def compound_stat(self, **cond):
@@ -533,6 +534,7 @@ class Syntax(object):
             exp = self.logical_or_exp()
             self.match_value(')')
         else:
+            exp = None
             self._raise_expected('<Expression>')
 
         return exp
