@@ -36,6 +36,21 @@ class Identifier(Node):
             Node.raise_error(f'"{symtype}" is a function. Line: {self.token.line_index} - Col: {self.token.col_index}')
             return None
 
+        if self.array_values['dimensions']:
+            for expresion in self.array_values['expressions']:
+                expresion.process_semantic()
+
+                if expresion.datatype != lang.SEMANTIC_INT_TYPE:
+                    Node.raise_error(f'Index must be of type {lang.SEMANTIC_INT_TYPE}. Line: {self.token.line_index} - Col: {self.token.col_index}')
+
+        access_dimensions = self.array_values['dimensions']
+        record_demensions = record['dimensions']
+        
+        if not access_dimensions and record_demensions:
+            Node.raise_error(f'{self.symbol} is not an array. Line: {self.token.line_index} - Col: {self.token.col_index}')
+        elif access_dimensions != record_demensions:
+            Node.raise_error(f'{self.symbol} takes {record_demensions} dimensions. Line: {self.token.line_index} - Col: {self.token.col_index}')
+
         self.datatype = record['datatype']
 
         return record
@@ -45,7 +60,8 @@ class Identifier(Node):
         record_symbol = record['symbol']
         record_context = record['context']
 
-        # TODO: vector code
+        for acces_exp in self.array_values['expressions']:
+            expresion.generate_code()
 
         array, line = Node.assignated_array()
         if cond.get('lod', True):

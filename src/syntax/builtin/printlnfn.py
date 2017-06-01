@@ -19,4 +19,5 @@ class PrintlnFn(Node):
         for i, param in enumerate(self.params):
             param.generate_code()
             _, line = Node.assignated_array()
-            Node.array_append(array, f'{line} OPR 0, 21')
+            op_code = 21 if  len(self.params) - 1 == i else 20
+            Node.array_append(array, f'{line} OPR 0, {op_code}')

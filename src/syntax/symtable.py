@@ -44,8 +44,11 @@ class SymTable(object):
             symtype=kwargs.get('symtype'),
             datatype=kwargs.get('datatype'),
             params=kwargs.get('params'),
+            value=kwargs.get('value'),
             context=self.current_contex,
-            extras=kwargs.get('extras', {})
+            extras=kwargs.get('extras', {}),
+            dimensions=kwargs.get('dimensions', 0),
+            sizes=kwargs.get('sizes', [])
         )
 
         try:

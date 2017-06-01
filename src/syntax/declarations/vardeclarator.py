@@ -28,11 +28,40 @@ class VarDeclarator(Node):
             except KeyError:
                 Node.raise_error(f'{self.init.datatype} type cannot be assigned to {datatype}. Line: {self.init.token.line_index} - Col: {self.init.token.col_index}')
 
+        sizes = []
+        if dimensions:
+            for dimension in self.dimensions_sizes:
+                dimension_datatype = lang.SEMANTIC_ERROR_TYPE
+
+                if dimension:
+                    dimension.process_semantic()
+                    dimension_datatype = dimension.datatype
+
+                if dimension_datatype != lang.SEMANTIC_INT_TYPE:
+                    Node.raise_error(f'Vector dimensions must be of type {lang.SEMANTIC_INT_TYPE}. Line: {self.init.token.line_index} - Col: {self.init.token.col_index}')
+                    return
+
+                dimension_size = dimension.symbol
+                if not dimension_size.isdigit():
+                    record = Node.symtable.get(dimension.symbol)
+                    dimension_size = record['value']
+
+                print('PUTA', dimension_size)
+                sizes.append(dimension_size)
+
+        if isconstant:
+            record_value = self.init.symbol
+        else:
+            record_value = None
+
         try:
             Node.symtable.set(
                 symbol_id,
                 symtype=symtype,
                 datatype=datatype,
+                value=record_value,
+                dimensions=self.dimensions,
+                sizes=sizes
             )
         except SymTableError as e:
             Node.raise_error(f'{symbol_id} is already defined. Line: {self.init.token.line_index} - Col: {self.init.token.col_index}')

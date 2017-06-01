@@ -55,7 +55,7 @@ class FunctionDef(Node):
         identifier = self.identifier.symbol
         func = Node.symtable.get(identifier)
         line = len(Node.code_funcs) + 1
-        func['extras'] = {'sizes': [line, 0]}
+        func['sizes'] = [line, 0]
 
         Node.symtable.set_record(GLOBAL_CONTEXT, identifier, func)
 

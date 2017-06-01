@@ -130,13 +130,16 @@ class Node(object):
         def format_var(key, record):
             class_name = lang.PL_CLASS_TYPES[record['symtype']]
             datatype = lang.PL_TYPES[record['datatype']]
-            try:
-                sizes = record['extras']['sizes']
-            except KeyError:
-                sizes = [0, 0]
+            sizes = record['sizes']
 
-            dim1 = sizes[0]
-            dim2 = sizes[1]
+            try:
+                dim1 = sizes[0]
+            except IndexError:
+                dim1 = 0
+            try:
+                dim2 = sizes[1]
+            except IndexError:
+                dim2 = 0
 
             return Node.pl_format_var(
                 key,
@@ -159,7 +162,7 @@ class Node(object):
                 '_P',
                 'I',
                 'I',
-                Node.symtable.get_table()[GLOBAL_CONTEXT]['$main']['extras']['sizes'][0])
+                Node.symtable.get_table()[GLOBAL_CONTEXT]['$main']['sizes'][0])
             )
 
         return code
