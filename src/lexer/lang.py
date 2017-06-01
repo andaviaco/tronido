@@ -173,3 +173,18 @@ SEMANTIC_VALID_OPS = {
     'F=F': 'B',
     'S=S': 'B',
 }
+
+PL_CLASS_TYPES = {
+    'CONST': 'C',
+    'VAR': 'V',
+    'FUNC': 'F',
+    'PARAM': 'P',
+}
+
+PL_TYPES = {
+    'I': 'E',
+    'F': 'R',
+    'S': 'A',
+    'B': 'L',
+    'V': 'V',
+}

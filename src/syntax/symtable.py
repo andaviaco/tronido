@@ -20,6 +20,10 @@ class SymTable(object):
         pp.pprint(SymTable._table)
 
     @staticmethod
+    def get_table():
+        return SymTable._table
+
+    @staticmethod
     def _formart_id_key(key):
         return f'${key}'
 
@@ -104,3 +108,6 @@ class SymTable(object):
     def exit_context(self):
         if self.current_contex != GLOBAL_CONTEXT:
             self.current_contex = GLOBAL_CONTEXT
+
+    def set_record(self, context, key, record):
+        self._table[context][key] = record

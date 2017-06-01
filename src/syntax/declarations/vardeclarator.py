@@ -36,3 +36,10 @@ class VarDeclarator(Node):
             )
         except SymTableError as e:
             return Node.raise_error(str(e))
+
+    def generate_code(self):
+        if self.init:
+            key = f'{Node.symtable.current_contex}@${self.identifier.symbol}'
+            self.init.generate_code()
+            array, line = Node.assignated_array()
+            Node.array_append(array, f'{line} STO 0, {key}')

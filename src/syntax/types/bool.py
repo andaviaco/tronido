@@ -7,3 +7,8 @@ class Bool(Node):
     """docstring for Bool."""
     def __init__(self, symbol, token):
         super().__init__(symbol, token)
+
+    def generate_code(self, **cond):
+        array, line = Node.assignated_array()
+
+        Node.array_append(array, f'{line} LIT {self.symbol}, 0')

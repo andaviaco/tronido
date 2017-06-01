@@ -1,0 +1,7 @@
+g@$main,F,V,0,0,#,
+g@main,F,V,0,0,#,
+_P,I,I,1,0,#,
+@
+1 LIT $"hola", 0
+2 OPR 0, 20
+3 OPR 0, 0

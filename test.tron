@@ -1,0 +1,170 @@
+constante decimal PI := 3.141592;
+constante entero MAX := 30;
+
+entero vector[MAX], matriz[MAX] [MAX], i, n, j;
+decimal r, s;
+alfabetico alfa, beta;
+logico bandera := falso;
+
+// Factorial Recursivo
+entero funcion FacRec( entero n)
+inicio
+  si ( n < 2 ) regresa 1;
+  sino regresa n * FacRec( n - 1);
+fin;
+
+// Factorial Iterativo
+entero funcion FacIter( entero n )
+entero facto := 1;
+inicio
+  para i en rango 2 a n incr 1
+     facto := facto * i;
+  regresa facto;
+fin;
+
+alfabetico funcion Concat(alfabetico ar, alfabetico b)
+inicio
+      regresa ar + " " + b;
+fin;
+
+procedimiento Selecciona()
+entero opc := 1;
+inicio
+   iterar mientras ( opc > 0 y opc < 4 )
+   inicio
+      imprime("Factorial 1]Recursivo 2]Iterativo 3]Salir: ");
+      lee( opc );
+      si (opc > 0 y opc < 3)
+      inicio
+         imprime("Dame un numero: ");
+         lee( n );
+      fin;
+      haz opcion (opc)
+      inicio
+         caso 1:
+            inicio
+            imprimenl("Factorial Recursivo de ", n, " es= ",  FacRec( n ) );
+            interrumpe;
+            fin;
+         caso 2:
+            inicio
+            imprimenl("Factorial Iterativo de ", n, " es= ",  FacIter( n ) );
+            interrumpe;
+            fin;
+         caso 3: regresa;
+         otro caso: imprimenl("Opcion No valida");
+       fin; //Opcion
+      fin; // Mientras
+   fin;
+
+   decimal funcion VolCil(decimal radio, decimal altura)
+   inicio
+      regresa PI * radio ^ 2 * altura;
+   fin;
+
+   procedimiento Test()
+   inicio
+      para i en rango 1 a 10
+      inicio
+         si (i = 5 ) continua;
+         imprimenl("i= ", i);
+      fin;
+
+      i := 1;
+      iterar mientras (verdadero)
+      inicio
+           imprimenl("i= ", i);
+           si (i = 7) interrumpe;
+           i := i + 1;
+      fin;
+   fin;
+
+   procedimiento LeeVec( entero k )
+   inicio
+     para i en rango 1 a k
+     inicio
+        imprime("Vector[", i, "]: " );
+        lee ( vector [ i ] );
+     fin;
+   fin;
+
+   procedimiento OrdBurbuja( entero k )
+   entero temp;
+   inicio
+      para i en rango 1 a  k - 1
+         para j en rango i + 1  a  k
+             si ( vector[i] > vector[j] )
+             inicio
+               temp := vector[i];
+               vector[i] := vector[j];
+               vector[j] := temp;
+             fin;
+   fin;
+
+   procedimiento ImpVec( entero k)
+   inicio
+      para i en rango 1 a k
+         imprimenl("Vector[", i, "]= ", vector[i] );
+   fin;
+
+   procedimiento LeeMat(entero k )
+   inicio
+      para i en rango 1 a k
+         para j en rango 1 a k
+         inicio
+            imprime("Matriz[", i, "][", j, "]: ");
+            lee( matriz[i][j] );
+         fin;
+   fin;
+
+   procedimiento MulMat( entero k, entero v )
+   inicio
+      para i en rango k a 1 decr 1
+         para j en rango k a 1 decr 1
+             matriz[i][j] := matriz[i][j] * v;
+   fin;
+
+   procedimiento ImpMat( entero k )
+   inicio
+      para i en rango 1 a k
+         para j en rango 1 a k
+              imprimenl( "Matriz[",  i, "][", j, "]= ",
+                          matriz[i][j] );
+   fin;
+
+   logico funcion Compara( decimal ar, decimal b )
+   inicio
+      regresa ar > b;
+   fin;
+
+programa
+inicio
+    Selecciona();
+    imprime("Dame Radio: ");
+    lee ( r );
+    imprime("Dame Altura: ");
+    lee ( s );
+    imprimenl("El Volumen del Cilindro= ", VolCil( r, s ) );
+    imprime ("Es el radio ",  r, " es mayor que la Altura ", s, "? ");
+    si (Compara( r, s ))
+        imprimenl( "Verdadero");
+    sino
+        imprimenl("Falso");
+    LeeVec( 5 );
+    OrdBurbuja( 5 );
+    imprimenl("");
+    imprimenl("*** Arreglo Ordenado ***");
+    ImpVec( 5 );
+    imprime("Dame elementos de Matriz NxN: ");
+    lee( n );
+    LeeMat( n );
+    MulMat( n, 100 );
+    imprimenl("");
+    ImpMat( n );
+    Test();
+    imprime("Dame tu nombre: ");
+    lee (alfa);
+    imprime("Dame tu Apellido: ");
+    lee (beta);
+    imprimenl("Hola ", Concat(alfa, beta), " ya pasaste!!!");
+fin programa.

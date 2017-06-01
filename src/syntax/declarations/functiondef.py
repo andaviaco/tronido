@@ -49,3 +49,36 @@ class FunctionDef(Node):
         Node.proccess_traversal_semantics(self.stats)
 
         Node.symtable.exit_context()
+
+    def generate_code(self, **cond):
+        identifier = self.identifier.symbol
+        func = Node.symtable.get(identifier)
+        line = len(Node.code_funcs) + 1
+        func['extras'] = {'sizes': [line]}
+
+        Node.symtable.set_record(GLOBAL_CONTEXT, identifier, func)
+
+        params = []
+        tmp_params = self.params
+
+        while tmp_params:
+            params.append(tmp_params)
+            tmp_params = tmp_params.next
+
+        for param in params[::-1]:
+            param_id = param.identifier.symbol
+            Node.code_funcs.append(f'{line} STO 0, {identifier}@${param_id}')
+            line += 1
+
+        Node.cascade_code(self.stats, context=identifier)
+        array = 'code_funcs'
+        line = len(Node.code_funcs) + 1
+        op_code = 1
+
+        if identifier == 'main':
+            array = 'code_main'
+            line += len(Node.code_main)
+            line += len(Node.code_inits)
+            op_code = 0
+
+        Node.array_append(array, f'{line} OPR 0, {op_code}')

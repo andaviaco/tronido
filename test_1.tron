@@ -1,0 +1,6 @@
+constante decimal PI := 3.141592;
+
+programa
+inicio
+    imprime("hola");
+fin programa.

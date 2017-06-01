@@ -42,6 +42,14 @@ if __name__ == '__main__':
         for error in w:
             print(f'{error.category.__name__}: {error.message}')
 
+        if not w:
+            code = Node.get_code(parse_tree)
+
+            with open('output.eje', 'w') as f:
+                print('\n'.join(code), file=f)
+                print('Done!')
+
+
 
     # for token in lexer:
     #     print(token.show(True))

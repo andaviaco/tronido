@@ -12,3 +12,6 @@ class Declaration(Node):
         datatype = self.datatype.get_type()
 
         Node.proccess_traversal_semantics(self.declarator, datatype=datatype)
+
+    def generate_code(self):
+        Node.cascade_code(self.declarator)
