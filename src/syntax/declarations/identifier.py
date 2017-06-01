@@ -47,7 +47,7 @@ class Identifier(Node):
         access_dimensions = self.array_values['dimensions']
         record_demensions = record['dimensions']
 
-        if not access_dimensions and record_demensions:
+        if access_dimensions and not record_demensions:
             Node.raise_error(f'{self.symbol} is not an array. Line: {self.token.line_index} - Col: {self.token.col_index}')
         elif access_dimensions != record_demensions:
             Node.raise_error(f'{self.symbol} takes {record_demensions} dimensions. Line: {self.token.line_index} - Col: {self.token.col_index}')
