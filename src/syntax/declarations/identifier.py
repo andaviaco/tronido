@@ -1,5 +1,6 @@
 import pprint as pp
 
+from lexer import lang
 from ..tree import Node
 from ..symtable import SymTableError
 
@@ -45,7 +46,7 @@ class Identifier(Node):
 
         access_dimensions = self.array_values['dimensions']
         record_demensions = record['dimensions']
-        
+
         if not access_dimensions and record_demensions:
             Node.raise_error(f'{self.symbol} is not an array. Line: {self.token.line_index} - Col: {self.token.col_index}')
         elif access_dimensions != record_demensions:
@@ -61,7 +62,7 @@ class Identifier(Node):
         record_context = record['context']
 
         for acces_exp in self.array_values['expressions']:
-            expresion.generate_code()
+            acces_exp.generate_code()
 
         array, line = Node.assignated_array()
         if cond.get('lod', True):

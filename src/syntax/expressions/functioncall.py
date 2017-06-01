@@ -22,7 +22,6 @@ class FunctionCall(Node):
         for param, arg in zip(params, args):
             arg.process_semantic()
 
-            print('ARG', arg.__class__.__name__, arg.datatype, param)
             if arg.datatype != param:
                 Node.raise_error(f'{identifier} expected {param}, got {arg.datatype}. Line: {self.token.line_index} - Col: {self.token.col_index}')
 

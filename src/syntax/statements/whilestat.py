@@ -28,7 +28,7 @@ class WhileStat(Node):
         false_label = Node.get_unique_label('false')
         while_label = Node.get_unique_label('while')
         array, _ = Node.assignated_array()
-        cond = {'break_to': false_label, 'continua_to': while_label}
+        cond = {'break_to': false_label, 'continue_to': while_label}
         _, line = Node.assignated_array()
 
         self.exp.generate_code()

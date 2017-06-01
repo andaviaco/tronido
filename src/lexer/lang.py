@@ -119,6 +119,7 @@ SEMANTIC_VALID_OPS = {
     'B:=B': 'V',
     'F:=I': 'V',
     'I:=F': 'V',
+    'V:=V': 'V',
     'I+I': 'I',
     'I+F': 'F',
     'F+I': 'F',

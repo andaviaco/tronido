@@ -33,8 +33,13 @@ if __name__ == '__main__':
 
         parse_tree = syntax.parse()
 
-        for node in parse_tree:
-            print(node)
+        print(1, parse_tree.declarator)
+        print(2, parse_tree.declarator.identifier)
+        print(3, parse_tree.next)
+        print(parse_tree.next.next)
+        print(parse_tree.next.next.next)
+        # for node in parse_tree:
+        #     print(node)
 
         Node.proccess_traversal_semantics(parse_tree)
         Node.symtable.show()

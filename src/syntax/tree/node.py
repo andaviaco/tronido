@@ -95,6 +95,7 @@ class Node(object):
             node.generate_code(**cond)
             node = node.next
 
+
     @staticmethod
     def assignated_array():
         line = len(Node.code_funcs) + 1

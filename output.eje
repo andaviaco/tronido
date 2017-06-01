@@ -4,37 +4,597 @@ g@$matriz,V,E,30,30,#,
 g@$i,V,E,0,0,#,
 g@$n,V,E,0,0,#,
 g@$j,V,E,0,0,#,
-g@$Test,F,V,3,0,#,
-g@$main,F,V,23,0,#,
-_P,I,I,23,0,#,
-_while_1,I,I,5,0,#
-_false_2,I,I,17,0,#,
-_endif_1,I,I,17,0,#,
-_false_1,I,I,22,0,#
-_return_1,I,I,25,0,#,
+g@$r,V,R,0,0,#,
+g@$s,V,R,0,0,#,
+g@$alfa,V,A,0,0,#,
+g@$beta,V,A,0,0,#,
+g@$bandera,V,L,0,0,#,
+g@$FacRec,F,E,5,0,#,
+g@$FacIter,F,E,25,0,#,
+g@$Concat,F,A,49,0,#,
+g@$Selecciona,F,V,59,0,#,
+g@$VolCil,F,R,127,0,#,
+g@$Test,F,V,142,0,#,
+g@$LeeVec,F,V,185,0,#,
+g@$OrdBurbuja,F,V,202,0,#,
+g@$ImpVec,F,V,251,0,#,
+g@$LeeMat,F,V,276,0,#,
+g@$MulMat,F,V,315,0,#,
+g@$ImpMat,F,V,352,0,#,
+g@$Compara,F,L,394,0,#,
+g@$main,F,V,402,0,#,
+FacRec@$n,P,E,0,0,#,
+FacIter@$n,P,E,0,0,#,
+FacIter@$facto,V,E,0,0,#,
+Concat@$ar,P,A,0,0,#,
+Concat@$b,P,A,0,0,#,
+Selecciona@$opc,V,E,0,0,#,
+VolCil@$radio,P,R,0,0,#,
+VolCil@$altura,P,R,0,0,#,
+LeeVec@$k,P,E,0,0,#,
+OrdBurbuja@$k,P,E,0,0,#,
+OrdBurbuja@$temp,V,E,0,0,#,
+ImpVec@$k,P,E,0,0,#,
+LeeMat@$k,P,E,0,0,#,
+MulMat@$k,P,E,0,0,#,
+MulMat@$v,P,E,0,0,#,
+ImpMat@$k,P,E,0,0,#,
+Compara@$ar,P,R,0,0,#,
+Compara@$b,P,R,0,0,#,
+_P,I,I,402,0,#,
+_false_1,I,I,14,0,#,
+_return_1,I,I,20,0,#,
+_endif_1,I,I,24,0,#,
+_for_1,I,I,30,0,#,
+_form_incr_1,I,I,35,0,#,
+_true_1,I,I,40,0,#,
+_false_2,I,I,45,0,#
+_while_1,I,I,61,0,#
+_false_4,I,I,84,0,#,
+_endif_2,I,I,84,0,#,
+_case_1,I,I,97,0,#,
+_return_2,I,I,106,0,#,
+_case_2,I,I,109,0,#,
+_return_3,I,I,118,0,#,
+_case_3,I,I,121,0,#,
+_default_case_1,I,I,122,0,#,
+_end_switch_1,I,I,125,0,#,
+_false_3,I,I,126,0,#
+_for_2,I,I,144,0,#,
+_form_incr_2,I,I,149,0,#,
+_true_2,I,I,154,0,#,
+_false_6,I,I,160,0,#,
+_endif_3,I,I,160,0,#,
+_false_5,I,I,165,0,#
+_while_2,I,I,167,0,#
+_false_8,I,I,179,0,#,
+_endif_4,I,I,179,0,#,
+_false_7,I,I,184,0,#
+_for_3,I,I,205,0,#,
+_form_incr_3,I,I,212,0,#,
+_true_3,I,I,217,0,#,
+_for_4,I,I,221,0,#,
+_form_incr_4,I,I,226,0,#,
+_true_4,I,I,231,0,#,
+_false_11,I,I,248,0,#,
+_endif_5,I,I,248,0,#,
+_false_10,I,I,249,0,#
+_false_9,I,I,250,0,#
+_for_5,I,I,255,0,#,
+_form_incr_5,I,I,260,0,#,
+_true_5,I,I,265,0,#,
+_false_12,I,I,275,0,#
+_for_6,I,I,279,0,#,
+_form_incr_6,I,I,284,0,#,
+_true_6,I,I,289,0,#,
+_for_7,I,I,291,0,#,
+_form_incr_7,I,I,296,0,#,
+_true_7,I,I,301,0,#,
+_false_14,I,I,313,0,#
+_false_13,I,I,314,0,#
+_for_8,I,I,319,0,#,
+_form_incr_8,I,I,324,0,#,
+_true_8,I,I,329,0,#,
+_for_9,I,I,331,0,#,
+_form_incr_9,I,I,336,0,#,
+_true_9,I,I,341,0,#,
+_false_16,I,I,350,0,#
+_false_15,I,I,351,0,#
+_for_10,I,I,355,0,#,
+_form_incr_10,I,I,360,0,#,
+_true_10,I,I,365,0,#,
+_for_11,I,I,367,0,#,
+_form_incr_11,I,I,372,0,#,
+_true_11,I,I,377,0,#,
+_false_18,I,I,392,0,#
+_false_17,I,I,393,0,#
+_return_4,I,I,404,0,#,
+_return_5,I,I,416,0,#,
+_return_6,I,I,432,0,#,
+_false_19,I,I,437,0,#,
+_endif_6,I,I,439,0,#,
+_return_7,I,I,442,0,#,
+_return_8,I,I,445,0,#,
+_return_9,I,I,452,0,#,
+_return_10,I,I,460,0,#,
+_return_11,I,I,462,0,#,
+_return_12,I,I,474,0,#,
 @
 1 LIT 30, 0
 2 STO 0, g@$MAX
-3 LIT 1, 0
-4 STO 0, g@$i
-5 LIT V, 0
-6 JMC F, _while_1
-7 LIT "i= ", 0
-8 OPR 0, 20
-9 LOD g@$i, 0
-10 OPR 0, 21
-11 LOD g@$i, 0
-12 LIT 7, 0
-13 OPR 0, 14
-14 JMC F, _false_2
-15 JMP 0, _false_1
-16 JMP 0, _endif_1
-17 LOD g@$i, 0
-18 LIT 1, 0
-19 OPR 0, 2
-20 STO 0, g@$i
-21 JMP 0, _while_1
-22 OPR 0, 1
-23 LOD _return_1, 0
-24 CAL g@$Test, 0
-25 OPR 0, 0
+3 LIT F, 0
+4 STO 0, g@$bandera
+5 STO 0, FacRec@$n
+6 LOD FacRec@$n, 0
+7 LIT 2, 0
+8 OPR 0, 9
+9 JMC F, _false_1
+10 LIT 1, 0
+11 STO 0, g@$FacRec
+12 OPR 0, 1
+13 JMP 0, _endif_1
+14 LOD FacRec@$n, 0
+15 LOD _return_1, 0
+16 LOD FacRec@$n, 0
+17 LIT 1, 0
+18 OPR 0, 3
+19 CAL g@$FacRec, 0
+20 LOD g@$FacRec, 0
+21 OPR 0, 4
+22 STO 0, g@$FacRec
+23 OPR 0, 1
+24 OPR 0, 1
+25 STO 0, FacIter@$n
+26 LIT 1, 0
+27 STO 0, FacIter@$facto
+28 LIT 2, 0
+29 STO 0, g@$i
+30 LOD g@$i, 0
+31 LOD FacIter@$n, 0
+32 OPR 0, 11
+33 JMC V, _true_1
+34 JMP 0, _false_2
+35 LOD g@$i, 0
+36 LIT 1, 0
+37 OPR 0, 2
+38 STO 0, g@$i
+39 JMP 0, _for_1
+40 LOD FacIter@$facto, 0
+41 LOD g@$i, 0
+42 OPR 0, 4
+43 STO 0, FacIter@$facto
+44 JMP 0, _form_incr_1
+45 LOD FacIter@$facto, 0
+46 STO 0, g@$FacIter
+47 OPR 0, 1
+48 OPR 0, 1
+49 STO 0, Concat@$b
+50 STO 0, Concat@$ar
+51 LOD Concat@$ar, 0
+52 LIT " ", 0
+53 OPR 0, 22
+54 LOD Concat@$b, 0
+55 OPR 0, 22
+56 STO 0, g@$Concat
+57 OPR 0, 1
+58 OPR 0, 1
+59 LIT 1, 0
+60 STO 0, Selecciona@$opc
+61 LOD Selecciona@$opc, 0
+62 LIT 0, 0
+63 OPR 0, 10
+64 LOD Selecciona@$opc, 0
+65 LIT 4, 0
+66 OPR 0, 9
+67 OPR 0, 15
+68 JMC F, _while_1
+69 LIT "Factorial 1]Recursivo 2]Iterativo 3]Salir: ", 0
+70 OPR 0, 20
+71 OPR Selecciona@$opc, 19
+72 LOD Selecciona@$opc, 0
+73 LIT 0, 0
+74 OPR 0, 10
+75 LOD Selecciona@$opc, 0
+76 LIT 3, 0
+77 OPR 0, 9
+78 OPR 0, 15
+79 JMC F, _false_4
+80 LIT "Dame un numero: ", 0
+81 OPR 0, 20
+82 OPR g@$n, 19
+83 JMP 0, _endif_2
+84 LOD Selecciona@$opc, 0
+85 LIT 1, 0
+86 OPR 0, 14
+87 JMC V, _case_1
+88 LOD Selecciona@$opc, 0
+89 LIT 2, 0
+90 OPR 0, 14
+91 JMC V, _case_2
+92 LOD Selecciona@$opc, 0
+93 LIT 3, 0
+94 OPR 0, 14
+95 JMC V, _case_3
+96 JMP 0, _default_case_1
+97 LIT "Factorial Recursivo de ", 0
+98 OPR 0, 20
+99 LOD g@$n, 0
+100 OPR 0, 20
+101 LIT " es= ", 0
+102 OPR 0, 20
+103 LOD _return_2, 0
+104 LOD g@$n, 0
+105 CAL g@$FacRec, 0
+106 LOD g@$FacRec, 0
+107 OPR 0, 21
+108 JMP 0, _end_switch_1
+109 LIT "Factorial Iterativo de ", 0
+110 OPR 0, 20
+111 LOD g@$n, 0
+112 OPR 0, 20
+113 LIT " es= ", 0
+114 OPR 0, 20
+115 LOD _return_3, 0
+116 LOD g@$n, 0
+117 CAL g@$FacIter, 0
+118 LOD g@$FacIter, 0
+119 OPR 0, 21
+120 JMP 0, _end_switch_1
+121 OPR 0, 1
+122 LIT "Opcion No valida", 0
+123 OPR 0, 21
+JMP 0, _end_switch_1
+125 JMP 0, _while_1
+126 OPR 0, 1
+127 STO 0, VolCil@$altura
+128 STO 0, VolCil@$radio
+129 LIT 5, 0
+130 STO 0, g@$VolCil
+131 OPR 0, 1
+132 LIT 3.141592, 0
+133 LOD VolCil@$radio, 0
+134 LIT 2, 0
+135 OPR 0, 7
+136 OPR 0, 4
+137 LOD VolCil@$altura, 0
+138 OPR 0, 4
+139 STO 0, g@$VolCil
+140 OPR 0, 1
+141 OPR 0, 1
+142 LIT 1, 0
+143 STO 0, g@$i
+144 LOD g@$i, 0
+145 LIT 10, 0
+146 OPR 0, 11
+147 JMC V, _true_2
+148 JMP 0, _false_5
+149 LOD g@$i, 0
+150 LIT 1, 0
+151 OPR 0, 2
+152 STO 0, g@$i
+153 JMP 0, _for_2
+154 LOD g@$i, 0
+155 LIT 5, 0
+156 OPR 0, 14
+157 JMC F, _false_6
+158 JMP 0, _form_incr_2
+159 JMP 0, _endif_3
+160 LIT "i= ", 0
+161 OPR 0, 20
+162 LOD g@$i, 0
+163 OPR 0, 21
+164 JMP 0, _form_incr_2
+165 LIT 1, 0
+166 STO 0, g@$i
+167 LIT V, 0
+168 JMC F, _while_2
+169 LIT "i= ", 0
+170 OPR 0, 20
+171 LOD g@$i, 0
+172 OPR 0, 21
+173 LOD g@$i, 0
+174 LIT 7, 0
+175 OPR 0, 14
+176 JMC F, _false_8
+177 JMP 0, _false_7
+178 JMP 0, _endif_4
+179 LOD g@$i, 0
+180 LIT 1, 0
+181 OPR 0, 2
+182 STO 0, g@$i
+183 JMP 0, _while_2
+184 OPR 0, 1
+185 STO 0, LeeVec@$k
+186 LIT 1, 0
+187 LIT 12, 0
+188 STO 0, g@$vector
+189 LIT 2, 0
+190 LIT 80, 0
+191 STO 0, g@$vector
+192 LIT 3, 0
+193 LIT 25, 0
+194 STO 0, g@$vector
+195 LIT 4, 0
+196 LIT 1, 0
+197 STO 0, g@$vector
+198 LIT 5, 0
+199 LIT 32, 0
+200 STO 0, g@$vector
+201 OPR 0, 1
+202 STO 0, OrdBurbuja@$k
+203 LIT 1, 0
+204 STO 0, g@$i
+205 LOD g@$i, 0
+206 LOD OrdBurbuja@$k, 0
+207 LIT 1, 0
+208 OPR 0, 3
+209 OPR 0, 11
+210 JMC V, _true_3
+211 JMP 0, _false_9
+212 LOD g@$i, 0
+213 LIT 1, 0
+214 OPR 0, 2
+215 STO 0, g@$i
+216 JMP 0, _for_3
+217 LOD g@$i, 0
+218 LIT 1, 0
+219 OPR 0, 2
+220 STO 0, g@$j
+221 LOD g@$j, 0
+222 LOD OrdBurbuja@$k, 0
+223 OPR 0, 11
+224 JMC V, _true_4
+225 JMP 0, _false_10
+226 LOD g@$j, 0
+227 LIT 1, 0
+228 OPR 0, 2
+229 STO 0, g@$j
+230 JMP 0, _for_4
+231 LOD g@$i, 0
+232 LOD g@$vector, 0
+233 LOD g@$j, 0
+234 LOD g@$vector, 0
+235 OPR 0, 10
+236 JMC F, _false_11
+237 LOD g@$i, 0
+238 LOD g@$vector, 0
+239 STO 0, OrdBurbuja@$temp
+240 LOD g@$i, 0
+241 LOD g@$j, 0
+242 LOD g@$vector, 0
+243 STO 0, g@$vector
+244 LOD g@$j, 0
+245 LOD OrdBurbuja@$temp, 0
+246 STO 0, g@$vector
+247 JMP 0, _endif_5
+248 JMP 0, _form_incr_4
+249 JMP 0, _form_incr_3
+250 OPR 0, 1
+251 STO 0, ImpVec@$k
+252 OPR 0, 1
+253 LIT 1, 0
+254 STO 0, g@$i
+255 LOD g@$i, 0
+256 LOD ImpVec@$k, 0
+257 OPR 0, 11
+258 JMC V, _true_5
+259 JMP 0, _false_12
+260 LOD g@$i, 0
+261 LIT 1, 0
+262 OPR 0, 2
+263 STO 0, g@$i
+264 JMP 0, _for_5
+265 LIT "Vector[", 0
+266 OPR 0, 20
+267 LOD g@$i, 0
+268 OPR 0, 20
+269 LIT "]= ", 0
+270 OPR 0, 20
+271 LOD g@$i, 0
+272 LOD g@$vector, 0
+273 OPR 0, 21
+274 JMP 0, _form_incr_5
+275 OPR 0, 1
+276 STO 0, LeeMat@$k
+277 LIT 1, 0
+278 STO 0, g@$i
+279 LOD g@$i, 0
+280 LOD LeeMat@$k, 0
+281 OPR 0, 11
+282 JMC V, _true_6
+283 JMP 0, _false_13
+284 LOD g@$i, 0
+285 LIT 1, 0
+286 OPR 0, 2
+287 STO 0, g@$i
+288 JMP 0, _for_6
+289 LIT 1, 0
+290 STO 0, g@$j
+291 LOD g@$j, 0
+292 LOD LeeMat@$k, 0
+293 OPR 0, 11
+294 JMC V, _true_7
+295 JMP 0, _false_14
+296 LOD g@$j, 0
+297 LIT 1, 0
+298 OPR 0, 2
+299 STO 0, g@$j
+300 JMP 0, _for_7
+301 LIT "Matriz[", 0
+302 OPR 0, 20
+303 LOD g@$i, 0
+304 OPR 0, 20
+305 LIT "][", 0
+306 OPR 0, 20
+307 LOD g@$j, 0
+308 OPR 0, 20
+309 LIT "]: ", 0
+310 OPR 0, 20
+311 OPR g@$matriz, 19
+312 JMP 0, _form_incr_7
+313 JMP 0, _form_incr_6
+314 OPR 0, 1
+315 STO 0, MulMat@$v
+316 STO 0, MulMat@$k
+317 LOD MulMat@$k, 0
+318 STO 0, g@$i
+319 LOD g@$i, 0
+320 LIT 1, 0
+321 OPR 0, 12
+322 JMC V, _true_8
+323 JMP 0, _false_15
+324 LOD g@$i, 0
+325 LIT 1, 0
+326 OPR 0, 3
+327 STO 0, g@$i
+328 JMP 0, _for_8
+329 LOD MulMat@$k, 0
+330 STO 0, g@$j
+331 LOD g@$j, 0
+332 LIT 1, 0
+333 OPR 0, 12
+334 JMC V, _true_9
+335 JMP 0, _false_16
+336 LOD g@$j, 0
+337 LIT 1, 0
+338 OPR 0, 3
+339 STO 0, g@$j
+340 JMP 0, _for_9
+341 LOD g@$i, 0
+342 LOD g@$j, 0
+343 LOD g@$i, 0
+344 LOD g@$j, 0
+345 LOD g@$matriz, 0
+346 LOD MulMat@$v, 0
+347 OPR 0, 4
+348 STO 0, g@$matriz
+349 JMP 0, _form_incr_9
+350 JMP 0, _form_incr_8
+351 OPR 0, 1
+352 STO 0, ImpMat@$k
+353 LIT 1, 0
+354 STO 0, g@$i
+355 LOD g@$i, 0
+356 LOD ImpMat@$k, 0
+357 OPR 0, 11
+358 JMC V, _true_10
+359 JMP 0, _false_17
+360 LOD g@$i, 0
+361 LIT 1, 0
+362 OPR 0, 2
+363 STO 0, g@$i
+364 JMP 0, _for_10
+365 LIT 1, 0
+366 STO 0, g@$j
+367 LOD g@$j, 0
+368 LOD ImpMat@$k, 0
+369 OPR 0, 11
+370 JMC V, _true_11
+371 JMP 0, _false_18
+372 LOD g@$j, 0
+373 LIT 1, 0
+374 OPR 0, 2
+375 STO 0, g@$j
+376 JMP 0, _for_11
+377 LIT "Matriz[", 0
+378 OPR 0, 20
+379 LOD g@$i, 0
+380 OPR 0, 20
+381 LIT "][", 0
+382 OPR 0, 20
+383 LOD g@$j, 0
+384 OPR 0, 20
+385 LIT "]= ", 0
+386 OPR 0, 20
+387 LOD g@$i, 0
+388 LOD g@$j, 0
+389 LOD g@$matriz, 0
+390 OPR 0, 21
+391 JMP 0, _form_incr_11
+392 JMP 0, _form_incr_10
+393 OPR 0, 1
+394 STO 0, Compara@$b
+395 STO 0, Compara@$ar
+396 LOD Compara@$ar, 0
+397 LOD Compara@$b, 0
+398 OPR 0, 10
+399 STO 0, g@$Compara
+400 OPR 0, 1
+401 OPR 0, 1
+402 LOD _return_4, 0
+403 CAL g@$Selecciona, 0
+404 LIT "Dame Radio: ", 0
+405 OPR 0, 20
+406 OPR g@$r, 19
+407 LIT "Dame Altura: ", 0
+408 OPR 0, 20
+409 OPR g@$s, 19
+410 LIT "El Volumen del Cilindro= ", 0
+411 OPR 0, 20
+412 LOD _return_5, 0
+413 LOD g@$r, 0
+414 LOD g@$s, 0
+415 CAL g@$VolCil, 0
+416 LOD g@$VolCil, 0
+417 OPR 0, 21
+418 LIT "Es el radio ", 0
+419 OPR 0, 20
+420 LOD g@$r, 0
+421 OPR 0, 20
+422 LIT " es mayor que la Altura ", 0
+423 OPR 0, 20
+424 LOD g@$s, 0
+425 OPR 0, 20
+426 LIT "? ", 0
+427 OPR 0, 20
+428 LOD _return_6, 0
+429 LOD g@$r, 0
+430 LOD g@$s, 0
+431 CAL g@$Compara, 0
+432 LOD g@$Compara, 0
+433 JMC F, _false_19
+434 LIT "Verdadero", 0
+435 OPR 0, 21
+436 JMP 0, _endif_6
+437 LIT "Falso", 0
+438 OPR 0, 21
+439 LOD _return_7, 0
+440 LIT 5, 0
+441 CAL g@$LeeVec, 0
+442 LOD _return_8, 0
+443 LIT 5, 0
+444 CAL g@$OrdBurbuja, 0
+445 LIT "", 0
+446 OPR 0, 21
+447 LIT "*** Arreglo Ordenado ***", 0
+448 OPR 0, 21
+449 LOD _return_9, 0
+450 LIT 5, 0
+451 CAL g@$ImpVec, 0
+452 LIT "Dame elementos de Matriz NxN: ", 0
+453 OPR 0, 20
+454 OPR g@$n, 19
+455 LIT "", 0
+456 OPR 0, 21
+457 LOD _return_10, 0
+458 LOD g@$n, 0
+459 CAL g@$ImpMat, 0
+460 LOD _return_11, 0
+461 CAL g@$Test, 0
+462 LIT "Dame tu nombre: ", 0
+463 OPR 0, 20
+464 OPR g@$alfa, 19
+465 LIT "Dame tu Apellido: ", 0
+466 OPR 0, 20
+467 OPR g@$beta, 19
+468 LIT "Hola ", 0
+469 OPR 0, 20
+470 LOD _return_12, 0
+471 LOD g@$alfa, 0
+472 LOD g@$beta, 0
+473 CAL g@$Concat, 0
+474 LOD g@$Concat, 0
+475 OPR 0, 20
+476 LIT " ya pasaste!!!", 0
+477 OPR 0, 21
+478 OPR 0, 0

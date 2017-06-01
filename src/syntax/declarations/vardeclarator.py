@@ -26,7 +26,7 @@ class VarDeclarator(Node):
             try:
                 lang.SEMANTIC_VALID_OPS[op_key]
             except KeyError:
-                Node.raise_error(f'{self.init.datatype} type cannot be assigned to {datatype}. Line: {self.init.token.line_index} - Col: {self.init.token.col_index}')
+                Node.raise_error(f'{self.init.datatype} type cannot be assigned to {datatype}. Line: {self.token.line_index} - Col: {self.token.col_index}')
 
         sizes = []
         if dimensions:
@@ -38,7 +38,7 @@ class VarDeclarator(Node):
                     dimension_datatype = dimension.datatype
 
                 if dimension_datatype != lang.SEMANTIC_INT_TYPE:
-                    Node.raise_error(f'Vector dimensions must be of type {lang.SEMANTIC_INT_TYPE}. Line: {self.init.token.line_index} - Col: {self.init.token.col_index}')
+                    Node.raise_error(f'Vector dimensions must be of type {lang.SEMANTIC_INT_TYPE}. Line: {self.token.line_index} - Col: {self.token.col_index}')
                     return
 
                 dimension_size = dimension.symbol
@@ -46,7 +46,6 @@ class VarDeclarator(Node):
                     record = Node.symtable.get(dimension.symbol)
                     dimension_size = record['value']
 
-                print('PUTA', dimension_size)
                 sizes.append(dimension_size)
 
         if isconstant:
@@ -67,8 +66,10 @@ class VarDeclarator(Node):
             Node.raise_error(f'{symbol_id} is already defined. Line: {self.init.token.line_index} - Col: {self.init.token.col_index}')
 
     def generate_code(self, **cond):
-        if self.init:
-            key = f'{Node.symtable.current_contex}@${self.identifier.symbol}'
-            self.init.generate_code()
-            array, line = Node.assignated_array()
-            Node.array_append(array, f'{line} STO 0, {key}')
+        if not self.init:
+            return None
+            
+        key = f'{Node.symtable.current_contex}@${self.identifier.symbol}'
+        self.init.generate_code()
+        array, line = Node.assignated_array()
+        Node.array_append(array, f'{line} STO 0, {key}')
