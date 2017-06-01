@@ -13,5 +13,5 @@ class Declaration(Node):
 
         Node.proccess_traversal_semantics(self.declarator, datatype=datatype)
 
-    def generate_code(self):
+    def generate_code(self, **cond):
         Node.cascade_code(self.declarator)

@@ -1,10 +1,238 @@
 g@$PI,C,R,0,0,#,
-g@$main,F,V,0,0,#,
-g@main,F,V,0,0,#,
-_P,I,I,3,0,#,
+g@$MAX,C,E,0,0,#,
+g@$vector,V,E,0,0,#,
+g@$matriz,V,E,0,0,#,
+g@$i,V,E,0,0,#,
+g@$n,V,E,0,0,#,
+g@$j,V,E,0,0,#,
+g@$r,V,R,0,0,#,
+g@$s,V,R,0,0,#,
+g@$alfa,V,A,0,0,#,
+g@$beta,V,A,0,0,#,
+g@$bandera,V,L,0,0,#,
+g@$FacRec,F,E,7,0,#,
+g@$FacIter,F,E,27,0,#,
+g@$Concat,F,A,35,0,#,
+g@$Selecciona,F,V,45,0,#,
+g@$VolCil,F,R,49,0,#,
+g@$Test,F,V,61,0,#,
+g@$LeeVec,F,V,66,0,#,
+g@$OrdBurbuja,F,V,69,0,#,
+g@$ImpVec,F,V,72,0,#,
+g@$LeeMat,F,V,75,0,#,
+g@$MulMat,F,V,78,0,#,
+g@$ImpMat,F,V,82,0,#,
+g@$Compara,F,L,85,0,#,
+g@$main,F,V,93,0,#,
+FacRec@$n,P,E,0,0,#,
+FacIter@$n,P,E,0,0,#,
+FacIter@$facto,V,E,0,0,#,
+Concat@$ar,P,A,0,0,#,
+Concat@$b,P,A,0,0,#,
+Selecciona@$opc,V,E,0,0,#,
+VolCil@$radio,P,R,0,0,#,
+VolCil@$altura,P,R,0,0,#,
+LeeVec@$k,P,E,0,0,#,
+OrdBurbuja@$k,P,E,0,0,#,
+OrdBurbuja@$temp,V,E,0,0,#,
+ImpVec@$k,P,E,0,0,#,
+LeeMat@$k,P,E,0,0,#,
+MulMat@$k,P,E,0,0,#,
+MulMat@$v,P,E,0,0,#,
+ImpMat@$k,P,E,0,0,#,
+Compara@$ar,P,R,0,0,#,
+Compara@$b,P,R,0,0,#,
+_P,I,I,93,0,#,
+_false_1,I,I,16,0,#,
+_return_1,I,I,22,0,#,
+_endif_1,I,I,26,0,#,
+_return_2,I,I,95,0,#,
+_return_3,I,I,107,0,#,
+_return_4,I,I,123,0,#,
+_false_2,I,I,128,0,#,
+_endif_2,I,I,130,0,#,
+_return_5,I,I,133,0,#,
+_return_6,I,I,136,0,#,
+_return_7,I,I,143,0,#,
+_return_8,I,I,149,0,#,
+_return_9,I,I,153,0,#,
+_return_10,I,I,158,0,#,
+_return_11,I,I,160,0,#,
+_return_12,I,I,172,0,#,
 @
 1 LIT 3.141592, 0
 2 STO 0, g@$PI
-3 LIT "hola", 0
-4 OPR 0, 20
-5 OPR 0, 0
+3 LIT 30, 0
+4 STO 0, g@$MAX
+5 LIT F, 0
+6 STO 0, g@$bandera
+7 STO 0, FacRec@$n
+8 LOD FacRec@$n, 0
+9 LIT 2, 0
+10 OPR 0, 9
+11 JMC F, _false_1
+12 LIT 1, 0
+13 STO 0, g@$FacRec
+14 OPR 0, 1
+15 JMP 0, _endif_1
+16 LOD FacRec@$n, 0
+17 LOD _return_1, 0
+18 LOD FacRec@$n, 0
+19 LIT 1, 0
+20 OPR 0, 3
+21 CAL g@$FacRec, 0
+22 LOD g@$FacRec, 0
+23 OPR 0, 4
+24 STO 0, g@$FacRec
+25 OPR 0, 1
+26 OPR 0, 1
+27 STO 0, FacIter@$n
+28 LIT 1, 0
+29 STO 0, FacIter@$facto
+ForStat
+31 LOD FacIter@$facto, 0
+32 STO 0, g@$FacIter
+33 OPR 0, 1
+34 OPR 0, 1
+35 STO 0, Concat@$b
+36 STO 0, Concat@$ar
+37 LOD Concat@$ar, 0
+38 LIT " ", 0
+39 OPR 0, 22
+40 LOD Concat@$b, 0
+41 OPR 0, 22
+42 STO 0, g@$Concat
+43 OPR 0, 1
+44 OPR 0, 1
+45 LIT 1, 0
+46 STO 0, Selecciona@$opc
+WhileStat
+48 OPR 0, 1
+49 STO 0, VolCil@$altura
+50 STO 0, VolCil@$radio
+51 LOD g@$PI, 0
+52 LOD VolCil@$radio, 0
+53 LIT 2, 0
+54 OPR 0, 7
+55 OPR 0, 4
+56 LOD VolCil@$altura, 0
+57 OPR 0, 4
+58 STO 0, g@$VolCil
+59 OPR 0, 1
+60 OPR 0, 1
+ForStat
+62 LIT 1, 0
+63 STO 0, g@$i
+WhileStat
+65 OPR 0, 1
+66 STO 0, LeeVec@$k
+ForStat
+68 OPR 0, 1
+69 STO 0, OrdBurbuja@$k
+ForStat
+71 OPR 0, 1
+72 STO 0, ImpVec@$k
+ForStat
+74 OPR 0, 1
+75 STO 0, LeeMat@$k
+ForStat
+77 OPR 0, 1
+78 STO 0, MulMat@$v
+79 STO 0, MulMat@$k
+ForStat
+81 OPR 0, 1
+82 STO 0, ImpMat@$k
+ForStat
+84 OPR 0, 1
+85 STO 0, Compara@$b
+86 STO 0, Compara@$ar
+87 LOD Compara@$ar, 0
+88 LOD Compara@$b, 0
+89 OPR 0, 10
+90 STO 0, g@$Compara
+91 OPR 0, 1
+92 OPR 0, 1
+93 LOD _return_2, 0
+94 CAL g@$Selecciona, 0
+95 LIT "Dame Radio: ", 0
+96 OPR 0, 20
+97 OPR g@$r, 19
+98 LIT "Dame Altura: ", 0
+99 OPR 0, 20
+100 OPR g@$s, 19
+101 LIT "El Volumen del Cilindro= ", 0
+102 OPR 0, 21
+103 LOD _return_3, 0
+104 LOD g@$r, 0
+105 LOD g@$s, 0
+106 CAL g@$VolCil, 0
+107 LOD g@$VolCil, 0
+108 OPR 0, 21
+109 LIT "Es el radio ", 0
+110 OPR 0, 20
+111 LOD g@$r, 0
+112 OPR 0, 20
+113 LIT " es mayor que la Altura ", 0
+114 OPR 0, 20
+115 LOD g@$s, 0
+116 OPR 0, 20
+117 LIT "? ", 0
+118 OPR 0, 20
+119 LOD _return_4, 0
+120 LOD g@$r, 0
+121 LOD g@$s, 0
+122 CAL g@$Compara, 0
+123 LOD g@$Compara, 0
+124 JMC F, _false_2
+125 LIT "Verdadero", 0
+126 OPR 0, 21
+127 JMP 0, _endif_2
+128 LIT "Falso", 0
+129 OPR 0, 21
+130 LOD _return_5, 0
+131 LIT 5, 0
+132 CAL g@$LeeVec, 0
+133 LOD _return_6, 0
+134 LIT 5, 0
+135 CAL g@$OrdBurbuja, 0
+136 LIT "", 0
+137 OPR 0, 21
+138 LIT "*** Arreglo Ordenado ***", 0
+139 OPR 0, 21
+140 LOD _return_7, 0
+141 LIT 5, 0
+142 CAL g@$ImpVec, 0
+143 LIT "Dame elementos de Matriz NxN: ", 0
+144 OPR 0, 20
+145 OPR g@$n, 19
+146 LOD _return_8, 0
+147 LOD g@$n, 0
+148 CAL g@$LeeMat, 0
+149 LOD _return_9, 0
+150 LOD g@$n, 0
+151 LIT 100, 0
+152 CAL g@$MulMat, 0
+153 LIT "", 0
+154 OPR 0, 21
+155 LOD _return_10, 0
+156 LOD g@$n, 0
+157 CAL g@$ImpMat, 0
+158 LOD _return_11, 0
+159 CAL g@$Test, 0
+160 LIT "Dame tu nombre: ", 0
+161 OPR 0, 20
+162 OPR g@$alfa, 19
+163 LIT "Dame tu Apellido: ", 0
+164 OPR 0, 20
+165 OPR g@$beta, 19
+166 LIT "Hola ", 0
+167 OPR 0, 21
+168 LOD _return_12, 0
+169 LOD g@$alfa, 0
+170 LOD g@$beta, 0
+171 CAL g@$Concat, 0
+172 LOD g@$Concat, 0
+173 OPR 0, 21
+174 LIT " ya pasaste!!!", 0
+175 OPR 0, 21
+176 OPR 0, 0

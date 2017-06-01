@@ -34,8 +34,9 @@ class SymTable(object):
     def set(self, key, **kwargs):
         accesskey = SymTable._formart_id_key(key)
         use_context = kwargs.get('use_context', self.current_contex)
+        bubble = kwargs.get('bubble', False)
 
-        if self.is_set(key):
+        if self.is_set(key, bubble):
             raise SymTableError(f'"{key}" is already defined.')
 
         record = dict(
@@ -44,7 +45,7 @@ class SymTable(object):
             datatype=kwargs.get('datatype'),
             params=kwargs.get('params'),
             context=self.current_contex,
-            extras=kwargs.get('extras')
+            extras=kwargs.get('extras', {})
         )
 
         try:
@@ -55,21 +56,24 @@ class SymTable(object):
         return record
 
 
-    def get(self, key):
+    def get(self, key, bubble=True):
         context = self.get_context()
         accesskey = SymTable._formart_id_key(key)
 
         try:
             return context[accesskey]
         except KeyError:
-            try:
-                return self._table[GLOBAL_CONTEXT][accesskey]
-            except KeyError:
+            if bubble:
+                try:
+                    return self._table[GLOBAL_CONTEXT][accesskey]
+                except KeyError:
+                    raise SymTableError(f'"{key}" is not defined.')
+            else:
                 raise SymTableError(f'"{key}" is not defined.')
 
-    def is_set(self, key):
+    def is_set(self, key, bubble=True):
         try:
-            self.get(key)
+            self.get(key, bubble)
             return True
         except SymTableError:
             return False

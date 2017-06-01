@@ -9,7 +9,7 @@ class Parameter(Node):
         self.datatype = datatype
         self.identifier = identifier
 
-    def process_semantic(self):
+    def process_semantic(self, **cond):
         datatype = self.datatype.get_type()
 
         if datatype == lang.SEMANTIC_ERROR_TYPE:

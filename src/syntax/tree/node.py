@@ -15,6 +15,7 @@ class Node(object):
     code_funcs = []
     code_inits = []
     code_main = []
+    labels = {}
 
     """docstring for Node."""
     def __init__(self, symbol, token):
@@ -87,8 +88,8 @@ class Node(object):
     def cascade_code(node, **cond):
         cond_context = cond.get('context', None)
 
-        # if cond.get('context', None):
-        #     Node.symtable.set_context(cond_context)
+        if cond_context:
+            Node.symtable.current_contex = cond_context
 
         while node:
             node.generate_code(**cond)
@@ -129,8 +130,13 @@ class Node(object):
         def format_var(key, record):
             class_name = lang.PL_CLASS_TYPES[record['symtype']]
             datatype = lang.PL_TYPES[record['datatype']]
-            dim1 = 0
-            dim2 = 0
+            try:
+                sizes = record['extras']['sizes']
+            except KeyError:
+                sizes = [0, 0]
+
+            dim1 = sizes[0]
+            dim2 = sizes[1]
 
             return Node.pl_format_var(
                 key,
@@ -145,7 +151,8 @@ class Node(object):
         code = []
         for context, values in symtable.items():
             for var, record in values.items():
-                code.append(format_var(f'{context}@{var}', record))
+                if var.startswith('$'):
+                    code.append(format_var(f'{context}@{var}', record))
 
         code.append(
             Node.pl_format_var(
@@ -160,6 +167,16 @@ class Node(object):
     @staticmethod
     def pl_format_var(identifier, class_type, datatype, dim1=0, dim2=0):
         return f'{identifier},{class_type},{datatype},{dim1},{dim2},#,'
+
+    @staticmethod
+    def get_unique_label(label):
+        try:
+            Node.labels[label] += 1
+        except:
+            Node.labels[label] = 1
+
+        return f'_{label}_{Node.labels[label]}'
+
 
     def generate_code(self, **cond):
         context = Node.symtable.get_context()

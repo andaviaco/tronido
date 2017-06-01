@@ -24,7 +24,7 @@ class Identifier(Node):
 
         return pp.pformat(rep)
 
-    def process_semantic(self):
+    def process_semantic(self, **cond):
         try:
             record = Node.symtable.get(self.symbol)
         except SymTableError:
@@ -39,3 +39,15 @@ class Identifier(Node):
         self.datatype = record['datatype']
 
         return record
+
+    def generate_code(self, **cond):
+        record = Node.symtable.get(self.symbol)
+        record_symbol = record['symbol']
+        record_context = record['context']
+
+        # TODO: vector code
+
+        array, line = Node.assignated_array()
+        if cond.get('lod', True):
+            lod_code = f'{line} LOD {record_context}@${record_symbol}, 0'
+            Node.array_append(array, lod_code)

@@ -7,7 +7,7 @@ class PrintFn(Node):
 
         self.params = params or []
 
-    def process_semantic(self):
+    def process_semantic(self, **cond):
         if self.params:
             for param in self.params:
                 param.process_semantic()

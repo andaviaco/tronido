@@ -30,10 +30,11 @@ class FunctionDef(Node):
                 Node.symtable.set(
                     definition_param.identifier.symbol,
                     symtype='PARAM',
-                    datatype=param_datatype
+                    datatype=param_datatype,
+                    bubble=False
                 )
             except SymTableError:
-                Node.raise_error(f'"{definition_param.identifier.symbol}" parameter it\'s already defined.')
+                Node.raise_error(f'"{definition_param.identifier.symbol}" parameter is already defined. Line: {self.token.line_index} - Col: {self.token.col_index}')
 
             definition_param = definition_param.next
 
@@ -54,7 +55,7 @@ class FunctionDef(Node):
         identifier = self.identifier.symbol
         func = Node.symtable.get(identifier)
         line = len(Node.code_funcs) + 1
-        func['extras'] = {'sizes': [line]}
+        func['extras'] = {'sizes': [line, 0]}
 
         Node.symtable.set_record(GLOBAL_CONTEXT, identifier, func)
 

@@ -7,7 +7,7 @@ class PrintlnFn(Node):
 
         self.params = params or []
 
-    def process_semantic(self):
+    def process_semantic(self, **cond):
         if self.params:
             for param in self.params:
                 param.process_semantic()
@@ -16,7 +16,7 @@ class PrintlnFn(Node):
 
     def generate_code(self, **cond):
         array, line = Node.assignated_array()
-        for param, i in enumerate(self.params):
+        for i, param in enumerate(self.params):
             param.generate_code()
             _, line = Node.assignated_array()
             Node.array_append(array, f'{line} OPR 0, 21')

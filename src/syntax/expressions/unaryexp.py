@@ -8,7 +8,7 @@ class UnaryExp(Node):
         self.symbol = symbol
         self.exp = exp or Node(None, token)
 
-    def process_semantic(self):
+    def process_semantic(self, **cond):
         self.exp.process_semantic()
 
         if self.exp.datatype in [lang.SEMANTIC_INT_TYPE, lang.SEMANTIC_DECIMAL_TYPE]:

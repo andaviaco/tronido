@@ -35,9 +35,9 @@ class VarDeclarator(Node):
                 datatype=datatype,
             )
         except SymTableError as e:
-            return Node.raise_error(str(e))
+            Node.raise_error(f'{symbol_id} is already defined. Line: {self.init.token.line_index} - Col: {self.init.token.col_index}')
 
-    def generate_code(self):
+    def generate_code(self, **cond):
         if self.init:
             key = f'{Node.symtable.current_contex}@${self.identifier.symbol}'
             self.init.generate_code()
